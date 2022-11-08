@@ -8,16 +8,16 @@ type BearInfo = {
   groupName: string;
 };
 
-interface BearState {
+type BearState = {
   bears: BearInfo;
-}
+};
 
 const bearsDefault = { count: 0, place: "Alaska", groupName: "Grizzlies" };
 
-interface BearActions {
+type BearActions = {
   increase: (by: number) => void;
   reset: () => void;
-}
+};
 
 export const useBearStore = createStore<BearState & BearActions>()(
   persist(
