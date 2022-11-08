@@ -3,28 +3,44 @@ import HUD from "../components/HUD";
 
 import createStore from "zustand";
 import { persist } from "zustand/middleware";
+import { immer } from "zustand/middleware/immer";
+
+type BearInfo = {
+  count: number;
+  place: string;
+  groupName: string;
+};
 
 interface BearState {
-  bears: number;
+  bears: BearInfo;
+}
+
+interface BearActions {
   increase: (by: number) => void;
   reset: () => void;
 }
 
-const useBearStore = createStore<BearState>()(
+const useBearStore = createStore<BearState & BearActions>()(
   persist(
-    (set) => ({
-      bears: 0,
-      increase: (by) => set((state) => ({ bears: state.bears + by })),
-      reset: () => set((state) => ({ bears: (state.bears = 0) })),
-    }),
+    immer<BearState & BearActions>((set) => ({
+      bears: { count: 0, place: "Alaska", groupName: "Grizzlies" },
+      increase: (by) =>
+        set((state) => {
+          state.bears.count = state.bears.count + by;
+        }),
+      reset: () =>
+        set((state) => {
+          state.bears.count = state.bears.count = 0;
+        }),
+    })),
     {
-      name: "bear-storage",
+      name: "bear-storage2",
     }
   )
 );
 
 export default function BattlePage() {
-  const bearCount: number = useBearStore((state) => state.bears);
+  const bearCount: number = useBearStore((state) => state.bears.count);
   const clickMore = useBearStore((state) => state.increase);
   const reset = useBearStore((state) => state.reset);
 
@@ -32,7 +48,6 @@ export default function BattlePage() {
     <>
       <HUD />
       <Text>Battle Page</Text>
-      <Button>Its a button</Button>
       <Text>Bears is {bearCount}</Text>
       <Button onClick={() => clickMore(1)}>Moar Bears</Button>
       <Button onClick={reset}>None Bears</Button>
