@@ -2,7 +2,40 @@ import createStore from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
-type InstanceState = {
+export const instanceActions = {
+  setName: (value: string) => {
+    useInstance.setState((state: InstanceState) => {
+      state.name = value;
+    });
+  },
+  setWorldLocation: (value: number) => {
+    useInstance.setState((state: InstanceState) => {
+      // Setting logic here
+    });
+  },
+  addBot: (value: Bot) => {
+    useInstance.setState((state: InstanceState) => {
+      // Setting logic here
+    });
+  },
+  setMoney: (value: number) => {
+    useInstance.setState((state: InstanceState) => {
+      state.inventory.money = value;
+    });
+  },
+  addMoney: (value: number) => {
+    useInstance.setState((state: InstanceState) => {
+      state.inventory.money += value;
+    });
+  },
+  addInventoryItem: (value: Item) => {
+    useInstance.setState((state: InstanceState) => {
+      // Setting logic here
+    });
+  },
+};
+
+export type InstanceState = {
   name: string;
   worldLocation: number;
   inventory: Inventory;
@@ -16,7 +49,7 @@ const instanceStateDefault = {
   playerTeam: [],
 };
 
-type Bot = {
+export type Bot = {
   id: string;
   name: string;
   template: BotTemplate;
@@ -24,29 +57,21 @@ type Bot = {
   maxHealth: number;
 };
 
-type BotTemplate = {
+export type BotTemplate = {
   id: string;
   name: string;
   maxHealth: number;
 };
 
-type Inventory = {
+export type Inventory = {
   money: number;
   maxItemCount: number;
   items: Item[];
 };
 
-type Item = {
+export type Item = {
   id: string;
   name: string;
-};
-
-type InstanceActions = {
-  setName: (value: string) => void;
-  // setWorldLocation: (value: number) => void;
-  // addBot: (value: Bot) => void;
-  // setMoney: (value: number) => void;
-  // addInventoryItem: (value: Item) => void;
 };
 
 export const useInstance = createStore<InstanceState>()(
