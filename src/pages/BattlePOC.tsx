@@ -1,7 +1,7 @@
 import { AppShell, Button, Header, Stack, Text } from "@mantine/core";
 
 import HUD from "~/components/HUD";
-import { useInstance, instanceActions } from "~/rules/GameState";
+import { useInstance, instanceActions } from "~/rules/Instance";
 
 export default function BattlePage() {
   const money: number = useInstance((state) => state.inventory.money);

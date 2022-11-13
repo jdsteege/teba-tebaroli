@@ -1,11 +1,10 @@
 import Battle from "./BattlePOC";
+import MainMenu from "./MainMenu";
 
 function App() {
-  return (
-    <>
-      <Battle />
-    </>
-  );
+  let page = <MainMenu />;
+
+  return <>{page}</>;
 }
 
 export default App;

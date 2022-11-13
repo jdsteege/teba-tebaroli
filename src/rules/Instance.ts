@@ -3,6 +3,11 @@ import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
 export const instanceActions = {
+  resetToDefault: () => {
+    useInstance.setState((state: InstanceState) => {
+      state = instanceStateDefault;
+    });
+  },
   setName: (value: string) => {
     useInstance.setState((state: InstanceState) => {
       state.name = value;
@@ -36,13 +41,15 @@ export const instanceActions = {
 };
 
 export type InstanceState = {
+  isActive: boolean;
   name: string;
   worldLocation: number;
   inventory: Inventory;
   playerTeam: Bot[];
 };
 
-const instanceStateDefault = {
+const instanceStateDefault: InstanceState = {
+  isActive: false,
   name: "NAME",
   worldLocation: 0,
   inventory: { money: 0, maxItemCount: 10, items: [] },
@@ -76,7 +83,9 @@ export type Item = {
 
 export const useInstance = createStore<InstanceState>()(
   persist(
-    immer<InstanceState>((set) => instanceStateDefault),
+    immer<InstanceState>((set) => {
+      return instanceStateDefault;
+    }),
     { name: "instance-state-01" }
   )
 );
