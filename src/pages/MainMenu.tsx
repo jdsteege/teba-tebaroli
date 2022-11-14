@@ -1,12 +1,14 @@
 import { Button, Center, Stack } from "@mantine/core";
-import { useInstance } from "~/rules/Instance";
+import { instanceActions, useInstance } from "~/rules/Instance";
 
 export default function MainMenu() {
   const instance = useInstance();
 
   const handleContinue = () => {};
 
-  const handleNewGame = () => {};
+  const handleNewGame = () => {
+    instanceActions.resetToDefault();
+  };
 
   let continueButton = <Button disabled>Continue</Button>;
   if (instance.isActive) {
