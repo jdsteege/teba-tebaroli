@@ -1,7 +1,7 @@
 import MainMenu from "./MainMenu";
-import BattlePage from "./BattlePOC";
 import { Settings } from "./Settings";
 import { GamePage } from "./GamePage";
+import BattlePage from "./BattlePOC";
 
 export enum PageID {
   MainMenu = "main-menu",
