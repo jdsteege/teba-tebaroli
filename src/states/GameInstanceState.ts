@@ -1,7 +1,6 @@
 import createStore from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { PageID } from "~/pages/PageRouter";
 
 export const instanceActions = {
   resetToDefault: () => {
@@ -14,14 +13,9 @@ export const instanceActions = {
       state.name = value;
     });
   },
-  setWorldLocation: (value: number) => {
-    useInstance.setState((state: InstanceState) => {
-      // Setting logic here
-    });
-  },
   addBot: (value: Bot) => {
     useInstance.setState((state: InstanceState) => {
-      // Setting logic here
+      state.playerTeam.push(value);
     });
   },
   setMoney: (value: number) => {
@@ -36,7 +30,7 @@ export const instanceActions = {
   },
   addInventoryItem: (value: Item) => {
     useInstance.setState((state: InstanceState) => {
-      // Setting logic here
+      state.inventory.items.push(value);
     });
   },
 };
@@ -44,8 +38,7 @@ export const instanceActions = {
 export type InstanceState = {
   isActive: boolean;
   name: string;
-  worldLocation: number;
-  page: PageID;
+  page: string;
   inventory: Inventory;
   playerTeam: Bot[];
 };
@@ -53,8 +46,7 @@ export type InstanceState = {
 const instanceStateDefault: InstanceState = {
   isActive: false,
   name: "NAME",
-  worldLocation: 0,
-  page: PageID.Explore,
+  page: "explore",
   inventory: { money: 0, maxItemCount: 10, items: [] },
   playerTeam: [],
 };
