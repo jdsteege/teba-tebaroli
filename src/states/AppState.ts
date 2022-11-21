@@ -4,7 +4,7 @@ import { immer } from "zustand/middleware/immer";
 
 export const stateActions = {
   setPage: (value: string) => {
-    useAppState.setState((state: AppState) => {
+    useStore.setState((state: AppState) => {
       state.page = value;
     });
   },
@@ -16,7 +16,7 @@ const appStateDefault: AppState = {
   page: "main-menu",
 };
 
-export const useAppState = createStore<AppState>()(
+const useStore = createStore<AppState>()(
   persist(
     immer<AppState>((set) => {
       return appStateDefault;
@@ -24,3 +24,9 @@ export const useAppState = createStore<AppState>()(
     { name: "app-state-01", getStorage: () => sessionStorage }
   )
 );
+
+// export function useAppPage(): string {
+//   return useAppState((state) => state.page);
+// }
+export const useAppPage = () => useStore((state) => state.page);
+

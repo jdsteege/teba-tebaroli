@@ -1,10 +1,10 @@
-import { useAppState } from "~/states/AppState";
+import { useAppPage } from "~/states/AppState";
 import { GamePage } from "./GamePage";
 import MainMenu from "./MainMenu";
 import { Settings } from "./Settings";
 
 function App() {
-  const pageString: string = useAppState((state) => state.page);
+  const pageString = useAppPage();
 
   let component: JSX.Element = <></>;
   if (pageString == "main-menu") {
@@ -16,6 +16,10 @@ function App() {
   }
 
   return <>{component}</>;
+}
+
+function GetPageContent() {
+
 }
 
 export default App;
