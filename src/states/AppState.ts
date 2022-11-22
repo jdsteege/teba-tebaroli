@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { AppPageKey } from "~/pages/App";
 
-export const stateActions = {
+export const appStateActions = {
   setPage: (value: AppPageKey) => {
     useStore.setState((state: AppState) => {
       state.page = value;

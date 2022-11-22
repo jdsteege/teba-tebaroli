@@ -1,13 +1,21 @@
 import { Button, Center, Stack } from "@mantine/core";
-import { instanceActions, useInstance } from "~/rules/Instance";
+import { appStateActions } from "~/states/AppState";
+import { instanceActions, useInstance } from "~/states/GameInstanceState";
 
 export default function MainMenu() {
   const instance = useInstance();
 
-  const handleContinue = () => {};
+  const handleContinue = () => {
+    appStateActions.setPage("game_instance");
+  };
 
   const handleNewGame = () => {
     instanceActions.resetToDefault();
+    appStateActions.setPage("game_instance");
+  };
+
+  const handleSettings = () => {
+    appStateActions.setPage("settings");
   };
 
   let continueButton = <Button disabled>Continue</Button>;
@@ -20,6 +28,7 @@ export default function MainMenu() {
       <Stack align="center" justify={"center"} style={{ minHeight: "100vh" }}>
         {continueButton}
         <Button onClick={handleNewGame}>New Game</Button>
+        <Button onClick={handleSettings}>Settings</Button>
       </Stack>
     </>
   );
