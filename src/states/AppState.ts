@@ -1,19 +1,20 @@
 import createStore from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { AppPageKey } from "~/pages/App";
 
 export const stateActions = {
-  setPage: (value: string) => {
+  setPage: (value: AppPageKey) => {
     useStore.setState((state: AppState) => {
       state.page = value;
     });
   },
 };
 
-type AppState = { page: string };
+type AppState = { page: AppPageKey };
 
 const appStateDefault: AppState = {
-  page: "main-menu",
+  page: "main_menu",
 };
 
 const useStore = createStore<AppState>()(
@@ -29,4 +30,3 @@ const useStore = createStore<AppState>()(
 //   return useAppState((state) => state.page);
 // }
 export const useAppPage = () => useStore((state) => state.page);
-

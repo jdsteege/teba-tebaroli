@@ -3,23 +3,22 @@ import { GamePage } from "./GamePage";
 import MainMenu from "./MainMenu";
 import { Settings } from "./Settings";
 
-function App() {
-  const pageString = useAppPage();
+export type AppPageKey = "main_menu" | "settings" | "game_instance";
 
-  let component: JSX.Element = <></>;
-  if (pageString == "main-menu") {
-    component = <MainMenu />;
-  } else if (pageString == "settings") {
-    component = <Settings />;
-  } else if (pageString == "gameInstance") {
-    component = <GamePage />;
-  }
+type PageDef = {
+  component: JSX.Element;
+};
 
-  return <>{component}</>;
+export default function App() {
+  const pageKey = useAppPage();
+
+  let page = pages[pageKey];
+
+  return <>{page.component}</>;
 }
 
-function GetPageContent() {
-
-}
-
-export default App;
+const pages: Record<AppPageKey, PageDef> = {
+  main_menu: { component: <MainMenu /> },
+  settings: { component: <Settings /> },
+  game_instance: { component: <GamePage /> },
+};
