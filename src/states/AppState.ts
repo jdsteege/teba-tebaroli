@@ -5,16 +5,22 @@ import { AppPageKey } from "~/pages/App";
 
 export const appStateActions = {
   setPage: (value: AppPageKey) => {
-    useStore.setState((state: AppState) => {
+    useStore.setState((state) => {
       state.page = value;
+    });
+  },
+  setShowInventory: (value: boolean) => {
+    useStore.setState((state) => {
+      state.showInventory = value;
     });
   },
 };
 
-type AppState = { page: AppPageKey };
+type AppState = { page: AppPageKey; showInventory: boolean };
 
 const appStateDefault: AppState = {
   page: "main_menu",
+  showInventory: false,
 };
 
 const useStore = createStore<AppState>()(
@@ -30,3 +36,4 @@ const useStore = createStore<AppState>()(
 //   return useAppState((state) => state.page);
 // }
 export const useAppPage = () => useStore((state) => state.page);
+export const useShowInventory = () => useStore((state) => state.showInventory);

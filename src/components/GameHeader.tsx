@@ -1,9 +1,9 @@
 import { Text } from "@mantine/core";
 
-export default function HUD() {
+export default function GameHeader() {
   return (
     <>
-      <div>HUD</div>
+      <div>GameHeader</div>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { AppShell, Button, Header, Stack, Text } from "@mantine/core";
 
-import HUD from "~/components/HUD";
+import HUD from "~/components/GameHeader";
 import { useInstance, instanceActions } from "~/states/GameInstanceState";
 
 export default function BattlePage() {
